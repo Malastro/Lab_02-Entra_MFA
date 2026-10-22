@@ -24,6 +24,7 @@ Creación automatizada mediante PowerShell de las identidades de la junta direct
 
 ## Fase 2: Resiliencia IAM y Cuentas Break-GlassSiguiendo las directrices del NIST y Microsoft para la mitigación del riesgo de pérdida total de acceso (tenant lockout):
 Se crearon dos cuentas nativas en la nube (bg-conserje1 y bg-conserje2) excluidas de cualquier federación o dependencia de la infraestructura local. Se les asignó de forma directa y permanente el rol de Administrador Global. Quedaron agrupadas bajo BreakGlass-Montepinar, garantizando que puedan ser excluidas de directivas que impongan autenticaciones de terceros o dependientes de dispositivos móviles.
+![Cuentas de Emergencia](
 
 ## Fase 3: Endurecimiento contra Ataques de MFA FatiguePara neutralizar vectores de compromiso basados en inundación de solicitudes push (Push Bombing / MFA Fatigue):
 Coincidencia de números (Number Matching): Se exige ingresar en la aplicación móvil el valor numérico aleatorio bidígito mostrado en la pantalla de inicio de sesión. Contexto de aplicación: La notificación emergente detalla explícitamente qué servicio o recurso solicita la autenticación (evitando inicios de sesión cruzados inadvertidos). Contexto geográfico: Se informa de la ciudad, región y dirección IP de origen, permitiendo al usuario identificar accesos desde ubicaciones anómalas.
