@@ -24,6 +24,7 @@ El objetivo de este laboratorio es configurar y validar una política de acceso 
 
 ### Fase 1. Preparación del entorno e identidades de prueba
 Se reutilizó el entorno de identidad híbrido desarrollado en el *Lab 01: Despliegue de Identidad Híbrida*.
+
 El laboratorio utiliza las identidades de prueba del directorio local sincronizadas con Microsoft Entra ID mediante Entra Connect (PHS). Sobre esta base se configuraron los controles de acceso y las medidas de protección de las identidades corporativas.
 
 ---
@@ -31,11 +32,11 @@ El laboratorio utiliza las identidades de prueba del directorio local sincroniza
 ### Fase 2. Cuentas de emergencia Break-Glass
 Para reducir el riesgo de perder el acceso administrativo al inquilino ante una incidencia con las políticas de autenticación o acceso condicional, se crearon dos cuentas de emergencia nativas de la nube (*cloud-only*): `bg-conserje1` y `bg-conserje2`.
 
-Las cuentas se configuraron con el rol de **Administrador global** de asignación permanente y se agruparon en `BreakGlass-Montepinar`, grupo destinado a centralizar su exclusión de las políticas de acceso condicional.
+Ambas cuentas se configuraron con el rol de **Administrador global** de asignación permanente y se agruparon en `BreakGlass-Montepinar`, grupo destinado a centralizar su exclusión de las políticas de acceso condicional.
 
 ![Asignación de Roles Break-Glass](./01_BreakGlass.png)
 
-> **Consideraciones de seguridad:** Las cuentas de emergencia deben contar con contraseñas complejas no federadas, monitorización continua mediante alertas ante cualquier intento de inicio de sesión y revisiones periódicas. Su exclusión de una política concreta no las exime automáticamente de las demás reglas del inquilino.
+> **Consideraciones de seguridad:** las cuentas de emergencia deben disponer de credenciales protegidas, almacenamiento seguro, supervisión de los inicios de sesión y revisiones periódicas. Su exclusión de una política concreta no las exime automáticamente de las demás políticas del tenant
 
 ---
 
@@ -48,6 +49,8 @@ Se creó la política `CA-Montepinar-MFA` para exigir autenticación multifactor
 * **Recursos de destino:** Todas las aplicaciones en la nube (*Todos los recursos*).
 * **Control de concesión:** Conceder acceso > Requerir autenticación multifactor.
 * **Estado inicial:** Solo informe (*Report-only*).
+  
+La exclusión de las cuentas de emergencia busca reducir el riesgo de bloqueo administrativo provocado por esta política concreta.
 
 | Exclusión Cuentas Break-Glass | Control de Concesión y Modo Informe |
 | :---: | :---: |
@@ -68,6 +71,7 @@ Se utilizó la herramienta What If de Microsoft Entra ID para evaluar la aplicac
 | Caso1: Evaluación Antonio Recio (MFA Requerido) | Caso 2: Evaluación Break-Glass (Exclusión Validada) |
 | :---: | :---: |
 | ![What If Recio](./04_WhatIfRecio.png) | ![What If Break-Glass](./05_WhatIfBG.png) |
+| La evaluación indicó que la política CA-Montepinar-MFA era aplicable a la identidad de prueba (arecio) y que requería MFA. | La evaluación indicó que la política se omitía debido a la exclusión configurada para el grupo BreakGlass-Montepinar.
 
 #### 2. Auditoría en Registros de Inicio de Sesión (Sign-in Logs)
 Manteniendo la directiva en modo **Solo informe**, se realizó un inicio de sesión interactivo con las credenciales de Antonio Recio en `https://myapplications.microsoft.com`.
@@ -85,12 +89,14 @@ Tras activar la política, se realizó una prueba de inicio de sesión con la cu
 ---
 
 ## 3. Resultados y consideraciones de seguridad
-El laboratorio validó el ciclo de vida completo de despliegue de controles de acceso corporativo:
-1. Preparación de identidades híbridas y cuentas de contingencia *Break-Glass*.
-2. Configuración granular de directivas de Acceso Condicional con aislamiento de rescate.
-3. Validación predictiva de reglas mediante *What If*.
-4. Análisis de los registros de inicio de sesión mediante *Sign-in logs* en modo no disruptivo (*Report-only*).
-5. Activación de la política en el entorno de laboratorio y validación del flujo de autenticación mediante una prueba de inicio de sesión..
+El laboratorio permitió configurar y evaluar una política de Acceso Condicional que exige MFA, preparar cuentas de emergencia y comprobar el comportamiento de la política antes y después de su activación.
+
+Las principales tareas realizadas fueron:
+- Preparación de identidades híbridas y cuentas de emergencia Break-Glass.
+- Configuración de una política de Acceso Condicional con grupos de inclusión y exclusión.
+- Evaluación de la política mediante What If.
+- Análisis de los registros de inicio de sesión durante la fase de Report-only.
+- Activación de la política en el entorno de laboratorio y validación del flujo de registro de MFA.
 
 ---
 
