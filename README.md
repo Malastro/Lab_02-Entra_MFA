@@ -65,7 +65,7 @@ Antes de forzar la directiva, se utilizó la herramienta *What If* de Microsoft 
 * **Caso 2: Cuenta de emergencia (`bg-conserje1`)**  
   La directiva se descarta por coincidencia con la regla de exclusión por pertenencia a grupos.
 
-| Evaluación Antonio Recio (MFA Requerido) | Evaluación Break-Glass (Exclusión Validada) |
+| Caso1: Evaluación Antonio Recio (MFA Requerido) | Caso 2: Evaluación Break-Glass (Exclusión Validada) |
 | :---: | :---: |
 | ![What If Recio](./04_WhatIfRecio.png) | ![What If Break-Glass](./05_WhatIfBG.png) |
 
