@@ -57,8 +57,8 @@ Se creó la política `CA-Montepinar-MFA` para exigir autenticación multifactor
 
 ### Fase 4. Validación, simulación y despliegue
 
-#### 1. Simulación Lógica con la Herramienta What If
-Antes de forzar la directiva, se utilizó la herramienta *What If* de Microsoft Entra ID para predecir matemáticamente la evaluación de las reglas sobre diferentes sujetos:
+#### 1. Simulación con la Herramienta What If
+Se utilizó la herramienta What If de Microsoft Entra ID para evaluar la aplicación de la política de Acceso Condicional a distintas identidades y comprobar el efecto de las inclusiones y exclusiones configuradas sobre dos sujetos diferentes:
 
 * **Caso 1: Antonio Recio (`arecio`)**  
   La directiva `CA-Montepinar-MFA` se evalúa como aplicable, exigiendo el cumplimiento del control MFA.
@@ -76,9 +76,9 @@ La inspección forense en los *Sign-in logs* confirmó que el usuario y el recur
 
 ![Auditoría Sign-in Log](./06_auditoria_arecio.png)
 
-#### 3. Ejecución y Bloqueo en Vivo
+#### 3. Activación y validación del requisito de MFA
 Una vez verificada la telemetría, la directiva se promovió al estado **Activado**.  
-En una sesión limpia de navegación con Antonio Recio, el motor de Acceso Condicional interceptó el inicio de sesión inmediatamente tras validar la contraseña, bloqueando el avance al portal hasta que el usuario complete el registro del método multifactor (*«Vamos a garantizar la seguridad de la cuenta»*).
+Tras activar la política, se realizó una prueba de inicio de sesión con la cuenta de Antonio Recio. Al no disponer todavía del método multifactor registrado, el flujo de autenticación solicitó completar el registro de la información de seguridad antes de continuar. Esta prueba permitió comprobar el efecto de exigir MFA sobre una identidad que aún no había completado el registro. (*«Vamos a garantizar la seguridad de la cuenta»*).
 
 ![Desafío MFA en Vivo](./07_MFAarecio.png)
 
@@ -89,8 +89,8 @@ El laboratorio validó el ciclo de vida completo de despliegue de controles de a
 1. Preparación de identidades híbridas y cuentas de contingencia *Break-Glass*.
 2. Configuración granular de directivas de Acceso Condicional con aislamiento de rescate.
 3. Validación predictiva de reglas mediante *What If*.
-4. Auditoría de telemetría de autenticación mediante *Sign-in logs* en modo no disruptivo (*Report-only*).
-5. Activación efectiva en producción y verificación del bloqueo de sesión en tiempo real.
+4. Análisis de los registros de inicio de sesión mediante *Sign-in logs* en modo no disruptivo (*Report-only*).
+5. Activación de la política en el entorno de laboratorio y validación del flujo de autenticación mediante una prueba de inicio de sesión..
 
 ---
 
