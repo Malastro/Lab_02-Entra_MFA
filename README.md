@@ -1,5 +1,5 @@
 
-# Lab 02: MFA en Microsoft Entra ID — Operación Moroso
+# Lab_02: MFA en Microsoft Entra ID — Operación Moroso
 
 ## 1. Descripción del proyecto
 
