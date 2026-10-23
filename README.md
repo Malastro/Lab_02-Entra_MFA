@@ -53,9 +53,9 @@ Se creó la política `CA-Montepinar-MFA` para exigir autenticación multifactor
 
 La exclusión de las cuentas de emergencia se configuró para evitar que esta política concreta impidiera su utilización durante una incidencia administrativa.
 
-![Configuración de usuarios incluidos y excluidos](./02_CA-Exclusiones.png)
+![Configuración de usuarios incluidos y excluidos](./02_BGExcluido.png)
 
-![Control de concesión y configuración de la política](./03_CA-MFA.png)
+![Control de concesión y configuración de la política](./03_Grant.png)
 
 ### Fase 4. Validación y despliegue de la política
 
@@ -67,19 +67,20 @@ Posteriormente, se utilizó la herramienta **What If** de Microsoft Entra ID par
 
 La evaluación indicó que la política `CA-Montepinar-MFA` se aplicaba a la identidad de prueba y requería MFA.
 
-![Evaluación What If para Antonio Recio](./04_WhatIf-Antonio.png)
+![Evaluación What If para Antonio Recio](./04_WhatIfRecio.png)
 
 **Caso 2. Cuenta de emergencia (`bg-conserje1`)**
 
 La evaluación mostró que la política se omitía debido a la exclusión explícita de las cuentas de emergencia.
 
-![Evaluación What If para la cuenta Break-Glass](./05_WhatIf-BreakGlass.png)
+![Evaluación What If para la cuenta Break-Glass](./05_WhatIfBG.png)
 
 Una vez realizadas estas comprobaciones, la política se cambió al estado **Activado**.
 
 Se efectuó una prueba de inicio de sesión con la cuenta de Antonio Recio para comprobar el comportamiento del acceso tras la activación. La exigencia de MFA se verificó en el contexto de la política configurada.
 
-![Evidencia de validación de la política de MFA](./06_MFA-Validacion.png)
+![Evidencia de validación de la política de MFA](./06_Auditoria_arecio.png)
+![MFA para arecio](./07_MFAarecio.png)
 
 ### Fase 5. Resultados y consideraciones de seguridad
 
