@@ -74,7 +74,7 @@ Manteniendo la directiva en modo **Solo informe**, se realizó un inicio de sesi
 
 La inspección forense en los *Sign-in logs* confirmó que el usuario y el recurso coincidieron con las condiciones fijadas, y el control de concesión devolvió el veredicto **«Solo informe: se requiere una acción del usuario»** (*Acción del usuario requerida*), confirmando que la directiva opera según lo previsto sin interrumpir la operativa real del usuario.
 
-![Auditoría Sign-in Log](./06_uditoria_arecio.png)
+![Auditoría Sign-in Log](./06_auditoria_arecio.png)
 
 #### 3. Ejecución y Bloqueo en Vivo
 Una vez verificada la telemetría, la directiva se promovió al estado **Activado**.  
